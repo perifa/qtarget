@@ -165,26 +165,26 @@ CreateThread(function()
 
 		JobCheck = function(job)
 			if type(job) == 'table' then
-				job = job[ESX.PlayerData.job.name]
-				if job and ESX.PlayerData.job.grade >= job then
+				job = job[ESX.CharacterData.job.name]
+				if job and ESX.CharacterData.job.grade >= job then
 					return true
 				end
-			elseif job == 'all' or job == ESX.PlayerData.job.name then
+			elseif job == ESX.CharacterData.job.name or job == 'all' then
 				return true
 			end
 			return false
 		end
 
-		RegisterNetEvent('esx:playerLoaded', function(xPlayer)
-			ESX.PlayerData = xPlayer
+		RegisterNetEvent('esx:playerLoaded', function(character)
+			ESX.CharacterData = character
 		end)
 
 		RegisterNetEvent('esx:setJob', function(job)
-			ESX.PlayerData.job = job
+			ESX.CharacterData.job = job
 		end)
 
 		RegisterNetEvent('esx:onPlayerLogout', function()
-			table.wipe(ESX.PlayerData)
+			table.wipe(ESX.CharacterData)
 		end)
 
 		AddEventHandler('esx:setPlayerData', function(key, val)
